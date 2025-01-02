@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Сетка категорий -->
+<div class="row row-cols-1 g-4">
+    {% for category in categories %}
+    <!-- Каждая карточка категории -->
+    <div class="col">
+        <div class="card h-100">  <!-- Карточка Bootstrap с высотой, заполняющей колонку -->
+            <a class="page-link" href="/films/{{ category.slug }}">{{ category.name }}</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+body {
+    background: #fafafa;
+    position: relative;
+    min-height: 100%;
+}
+
+body header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #2c4859;
+}
+
+.my-5 {
+    margin-top: 7rem !important;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+a.page-link {
+    font-size: 32px;
+    color: #2c4859;
+}
+
+a.page-link:hover {
+    color: #2c4859;
+}
