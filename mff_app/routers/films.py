@@ -21,28 +21,27 @@ templates = Jinja2Templates(directory='templates')
 DbSession = Annotated[Session, Depends(get_db)]
 
 
+# Маршруты для шаблонов
 @router.get('/')
-async def get_all_films(request: Request, db: DbSession) -> HTMLResponse:
+async def get_films_by_category(request: Request, db: DbSession, slug: str='') -> HTMLResponse:
     """
-    Получение всех фильмов
+    Получение всех фильмов или списка фильмов по категории при параметре запроса
     """
-    films = db.scalars(select(Film)).all()
-    return templates.TemplateResponse('films.html', {'request': request, 'films': films})
+    if slug:
+        category = db.scalar(select(Category).where(Category.slug == slug))
+        films = db.scalars(select(Film).where(Film.category_id == category.id)).all()
+        return templates.TemplateResponse('films_by_category.html', {'request': request,
+                                                                     'category': category, 'films': films})
+    else:
+        films = db.scalars(select(Film)).all()
+        return templates.TemplateResponse('films.html', {'request': request, 'films': films})
 
-
-@router.get('/film_id')
-async def get_film_by_id(db: DbSession, film_id: int):
-    """
-    Получение фильма по ID
-    """
-    film = db.scalar(select(Film).where(Film.id == film_id))
-    return film
 
 
 @router.get('/{category_slug}')
 async def get_films_by_category(request: Request, db: DbSession, category_slug: str) -> HTMLResponse:
     """
-    Получение списка фильмов по категории
+    Получение списка фильмов по категории - динамические URL
     """
     category = db.scalar(select(Category).where(Category.slug == category_slug))
     films = db.scalars(select(Film).where(Film.category_id == category.id)).all()
@@ -50,10 +49,20 @@ async def get_films_by_category(request: Request, db: DbSession, category_slug: 
                                                                  'category': category, 'films': films})
 
 
+# Маршруты для админки
+@router.get('/film_id')
+async def get_film_by_id(db: DbSession, film_id: int):
+    """
+    Получение фильма по ID (для админки)
+    """
+    film = db.scalar(select(Film).where(Film.id == film_id))
+    return film
+
+
 @router.post('/create')
 async def create_film(db: DbSession, create_film: CreateFilm, category_id: int):
     """
-    Добавление фильма
+    Добавление фильма (для админки)
     """
     category = db.scalar(select(Category).where(Category.id == category_id))
     db.execute(insert(Film).values(title=create_film.title,
@@ -77,7 +86,7 @@ async def create_film(db: DbSession, create_film: CreateFilm, category_id: int):
 @router.put('/update')
 async def update_film(db: DbSession, film_id: int, update_film: CreateFilm):
     """
-    Редактирование фильма
+    Редактирование фильма (для админки)
     """
     film = db.scalar(select(Film).where(Film.id == film_id))
     if film is None:
@@ -107,7 +116,7 @@ async def update_film(db: DbSession, film_id: int, update_film: CreateFilm):
 @router.delete('/delete')
 async def delete_film(db: DbSession, film_id: int):
     """
-    Удаление фильма
+    Удаление фильма (для админки)
     """
     film = db.scalar(select(Film).where(Film.id == film_id))
     if film is None:

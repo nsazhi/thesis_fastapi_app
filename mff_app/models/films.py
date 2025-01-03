@@ -1,4 +1,6 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from datetime import date
+
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Date
 from sqlalchemy.orm import relationship
 from mff_app.backend.db import Base
 from mff_app.models import *
@@ -16,11 +18,8 @@ class Film(Base):
     director = Column(String)
     actors = Column(String)
     description = Column(String)
-    img_url = Column(String, default='/static/images/placeholder.png')
+    img_url = Column(String)
     is_viewed = Column(Boolean, default=False)
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False, index=True)
     category = relationship("Category", back_populates="films")
-
-
-# from sqlalchemy.schema import CreateTable
-# print(CreateTable(Film.__table__))
+    created_at = Column(Date)

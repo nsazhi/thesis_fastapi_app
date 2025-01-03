@@ -12,6 +12,3 @@ class Category(Base):
     slug = Column(String, unique=True, index=True)
 
     films = relationship("Film", back_populates="category")
-
-# from sqlalchemy.schema import CreateTable
-# print(CreateTable(Category.__table__))

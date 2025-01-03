@@ -22,7 +22,8 @@ templates = Jinja2Templates(directory='templates')
 DbSession = Annotated[Session, Depends(get_db)]
 
 
-# Главная страница
+# Маршруты для шаблонов
+# Главная страница: роутер без префикса
 @router1.get('/')
 async def main_page(request: Request, db: DbSession) -> HTMLResponse:
     """
@@ -32,10 +33,12 @@ async def main_page(request: Request, db: DbSession) -> HTMLResponse:
     return templates.TemplateResponse('main.html', {'request': request, 'categories': categories})
 
 
+# Маршруты для админки
+# Страницы с префиксом /category для корректной работы с такими же endpoint в фильмах
 @router2.post('/create')
 async def create_category(db: DbSession, create_category: CreateCategory):
     """
-    Добавление категории
+    Добавление категории (для админки)
     """
     db.execute(insert(Category).values(name=create_category.name,
                                        slug=slugify(create_category.name)))
@@ -49,7 +52,7 @@ async def create_category(db: DbSession, create_category: CreateCategory):
 @router2.put('/update')
 async def update_category(db: DbSession, category_id: int, update_category: CreateCategory):
     """
-    Редактирование категории
+    Редактирование категории (для админки)
     """
     category = db.scalar(select(Category).where(Category.id == category_id))
     if category is None:
@@ -71,7 +74,7 @@ async def update_category(db: DbSession, category_id: int, update_category: Crea
 @router2.delete('/delete')
 async def delete_category(db: DbSession, category_id: int):
     """
-    Удаление категории
+    Удаление категории (для админки)
     """
     category = db.scalar(select(Category).where(Category.id == category_id))
     if category is None:

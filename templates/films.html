@@ -1,8 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Каталог всех фильмов</h2>
-<br>
+<div class="container page-title">
+    <div class="row">
+        <div class="col-10">
+            {% block header %}<h2>Каталог всех фильмов</h2>{% endblock %}
+        </div>
+        <div class="col-2">
+            <div class="btn-group">
+                <button class="dropdown-toggle filter" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Фильтр
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/films">Все</a></li>
+                    <li><a class="dropdown-item" href="/films?slug=filmy">Фильмы</a></li>
+                    <li><a class="dropdown-item" href="/films?slug=serialy">Сериалы</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Сетка фильмов -->
 <div class="row row-cols-1 gy-5">
     {% for film in films %}

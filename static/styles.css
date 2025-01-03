@@ -4,7 +4,7 @@ body {
     min-height: 100%;
 }
 
-body header {
+header {
     position: fixed;
     top: 0;
     width: 100%;
@@ -19,6 +19,29 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.page-title {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.filter {
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 1.2em;
+    border-color: #29516d;
+    border-radius: 9px;
+    background: #2c4859;
+    color: #fff;
+}
+
+.filter:hover {
+    background: rgba(41, 81, 109, 0.8);
+}
+
+a.dropdown-item:active {
+    background: #29516d;
 }
 
 a.page-link {
