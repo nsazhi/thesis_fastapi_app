@@ -2,6 +2,8 @@ body {
     background: #fafafa;
     position: relative;
     min-height: 100%;
+    margin-top: 7rem !important;
+    margin-bottom: 10rem !important;
 }
 
 header {
@@ -9,10 +11,6 @@ header {
     top: 0;
     width: 100%;
     background: #2c4859;
-}
-
-.my-5 {
-    margin-top: 7rem !important;
 }
 
 footer {
