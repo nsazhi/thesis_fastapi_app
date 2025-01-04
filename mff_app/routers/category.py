@@ -30,7 +30,7 @@ async def main_page(request: Request, db: DbSession) -> HTMLResponse:
     Главная страница: список категорий
     """
     categories = db.scalars(select(Category)).all()
-    return templates.TemplateResponse('main.html', {'request': request, 'categories': categories})
+    return templates.TemplateResponse('catalog/main.html', {'request': request, 'categories': categories})
 
 
 # Маршруты для админки

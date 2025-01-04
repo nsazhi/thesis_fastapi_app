@@ -30,11 +30,11 @@ async def get_films_by_category(request: Request, db: DbSession, slug: str='') -
     if slug:
         category = db.scalar(select(Category).where(Category.slug == slug))
         films = db.scalars(select(Film).where(Film.category_id == category.id)).all()
-        return templates.TemplateResponse('films_by_category.html', {'request': request,
+        return templates.TemplateResponse('catalog/films_by_category.html', {'request': request,
                                                                      'category': category, 'films': films})
     else:
         films = db.scalars(select(Film)).all()
-        return templates.TemplateResponse('films.html', {'request': request, 'films': films})
+        return templates.TemplateResponse('catalog/films.html', {'request': request, 'films': films})
 
 
 
