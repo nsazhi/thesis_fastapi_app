@@ -24,10 +24,15 @@ footer {
     margin-bottom: 100px;
 }
 
+.btn-group {
+    position: static;
+    padding: 5px;
+}
+
 .filter {
-    padding-left: 40px;
-    padding-right: 40px;
-    font-size: 1.2em;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 1em;
     border-color: #29516d;
     border-radius: 9px;
     background: #2c4859;
