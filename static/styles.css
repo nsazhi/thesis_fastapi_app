@@ -21,9 +21,12 @@ footer {
 
 .page-title {
     margin-top: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
+.film-card {
+    margin-top: 100px;
+}
 .btn-group {
     position: static;
     padding: 5px;

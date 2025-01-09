@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Панель администратора</h1>
+<hr>
+<div class="row">
+    <div class="col">
+        <h3>Добавление фильма</h3>
+    </div>
+    <div class="col">
+        <a href="/admin/category/create"><h4>Добавить категорию</h4></a>
+    </div>
+</div>
+<br>
+<form action="/admin/films/create" method="post">
+    <p>
+        <label for="category_id">Категория:</label>
+        <br>
+        <input name="category_id" required>
+    </p>
+    <p>
+        <label for="title">Название:</label>
+        <br>
+        <input name="title" required>
+    </p>
+    <p>
+        <label for="release">Год выхода:</label>
+        <br>
+        <input name="release" required>
+    </p>
+    <p>
+        <label for="country">Страна:</label>
+        <br>
+        <input name="country" required>
+    </p>
+    <p>
+        <label for="genre">Жанр:</label>
+        <br>
+        <input name="genre" required>
+    </p>
+    <p>
+        <label for="director">Режиссер:</label>
+        <br>
+        <input name="director" required>
+    </p>
+    <p>
+        <label for="actors">Актеры:</label>
+        <br>
+        <input name="actors" required>
+    </p>
+    <p>
+        <label for="description">Описание:</label>
+        <br>
+        <input name="description" required>
+    </p>
+    <p>
+        <label for="img_url">Ссылка на изображение:</label>
+        <br>
+        <input name="img_url" value="/static/images/placeholder.png">
+    </p>
+    <button type="submit">Готово</button>
+</form>
+<hr>
+{% endblock %}

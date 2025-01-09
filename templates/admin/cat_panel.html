@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Панель администратора</h1>
+<hr>
+<div class="row">
+    <div class="col">
+        <h3>Добавление категории</h3>
+    </div>
+    <div class="col">
+        <a href="/admin/films/create"><h4>Добавить фильм</h4></a>
+    </div>
+</div>
+<br>
+<form action="/admin/category/create" method="post">
+    <p>
+        <label for="name">Название категории:</label>
+        <br>
+        <input name="name" value="" required>
+    </p>
+    <button type="submit">Готово</button>
+</form>
+<hr>
+{% endblock %}

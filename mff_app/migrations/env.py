@@ -19,8 +19,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from mff_app.backend.db import Base
-from mff_app.models.category import Category
-from mff_app.models.films import Film
+from mff_app.models import Category, Film, Admin
 
 target_metadata = Base.metadata
 

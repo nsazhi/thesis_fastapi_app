@@ -1,8 +1,9 @@
-from .db import SessionLocal
+from mff_app.backend import SessionLocal
+
 
 def get_db():
     """
-    Функция для получения сессии
+    Функция для получения сессии подключения к БД
     """
     db = SessionLocal()
     try:
