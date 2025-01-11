@@ -14,51 +14,51 @@
 <br>
 <form action="/admin/films/create" method="post">
     <p>
-        <label for="category_id">Категория:</label>
+        <label for="category_id">Категория</label>
         <br>
         <input name="category_id" required>
     </p>
     <p>
-        <label for="title">Название:</label>
+        <label for="title">Название</label>
         <br>
         <input name="title" required>
     </p>
     <p>
-        <label for="release">Год выхода:</label>
+        <label for="release">Год выхода</label>
         <br>
         <input name="release" required>
     </p>
     <p>
-        <label for="country">Страна:</label>
+        <label for="country">Страна</label>
         <br>
         <input name="country" required>
     </p>
     <p>
-        <label for="genre">Жанр:</label>
+        <label for="genre">Жанр</label>
         <br>
         <input name="genre" required>
     </p>
     <p>
-        <label for="director">Режиссер:</label>
+        <label for="director">Режиссер</label>
         <br>
         <input name="director" required>
     </p>
     <p>
-        <label for="actors">Актеры:</label>
+        <label for="actors">Актеры</label>
         <br>
         <input name="actors" required>
     </p>
     <p>
-        <label for="description">Описание:</label>
+        <label for="description">Описание</label>
         <br>
-        <input name="description" required>
+        <input class="textarea" name="description" required>
     </p>
     <p>
-        <label for="img_url">Ссылка на изображение:</label>
+        <label for="img_url">Ссылка на изображение</label>
         <br>
         <input name="img_url" value="/static/images/placeholder.png">
     </p>
+    <br>
     <button type="submit">Готово</button>
 </form>
-<hr>
 {% endblock %}

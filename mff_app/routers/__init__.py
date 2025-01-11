@@ -10,6 +10,7 @@ from slugify import slugify
 
 from mff_app.models import *
 from mff_app.backend import get_db
+from mff_app.schemas import *
 
 # Подключение шаблонов
 templates = Jinja2Templates(directory='templates')

@@ -12,10 +12,26 @@ async def login(request: Request):
     return templates.TemplateResponse('admin/login.html', {'request': request})
 
 
-@router.post('/login')
-async def login_in(request: Request, db: DbSession, username: str = Form(), password: str = Form()):
+@router.post('/')
+async def add_admin(db: DbSession, create: CreateAdmin):
     """
-    Вход админа или регистрация нового
+    Регистрация админа
+    """
+    admin = Admin()
+    db.execute(insert(Admin).values(username=create.username,
+                                    password_hash=admin.set_password(create.password)
+                                    ))
+    db.commit()
+    return {
+        'status_code': status.HTTP_201_CREATED,
+        'transaction': 'Admin created successful'
+    }
+
+
+@router.post('/login')
+async def login_in(db: DbSession, username: str = Form(), password: str = Form()):
+    """
+    Вход админа
     """
     admin = db.scalar(select(Admin).where(Admin.username == username))
     if admin:
@@ -24,10 +40,3 @@ async def login_in(request: Request, db: DbSession, username: str = Form(), pass
             return RedirectResponse('category/create', status_code=status.HTTP_303_SEE_OTHER)
         except:
             raise HTTPException(401, 'Неверный пароль')
-    else:
-        admin = Admin()
-        db.execute(insert(Admin).values(username=username,
-                                        password_hash=admin.set_password(password)
-                                        ))
-        db.commit()
-        return RedirectResponse('category/create', status_code=status.HTTP_303_SEE_OTHER)

@@ -16,13 +16,13 @@ async def category_form(request: Request):
 
 
 @router.post('/create')
-async def create_category(db: DbSession, name: str = Form()):
+async def create_category(db: DbSession, create: CreateCategory = Form()):
     """
     Добавление категории (для админа)
     """
     try:
-        db.execute(insert(Category).values(name=name,
-                                           slug=slugify(name)))
+        db.execute(insert(Category).values(name=create.name,
+                                           slug=slugify(create.name)))
         db.commit()
         return RedirectResponse('#', status_code=status.HTTP_303_SEE_OTHER)
     except:

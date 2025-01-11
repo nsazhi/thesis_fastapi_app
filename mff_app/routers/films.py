@@ -43,32 +43,24 @@ async def film_form(request: Request):
 
 
 @router2.post('/create')
-async def create_film(db: DbSession, title: str = Form(),
-                      release: str = Form(),
-                      country: str = Form(),
-                      genre: str = Form(),
-                      director: str = Form(),
-                      actors: str = Form(),
-                      description: str = Form(),
-                      img_url: str = Form(),
-                      category_id: int = Form()):
+async def create_film(db: DbSession, create: CreateFilm = Form()):
     """
     Добавление фильма (для админа)
     """
     try:
-        category = db.scalar(select(Category).where(Category.id == category_id))
-        db.execute(insert(Film).values(title=title,
-                                       slug=slugify(title),
-                                       release=release,
-                                       country=country,
-                                       genre=genre,
-                                       director=director,
-                                       actors=actors,
-                                       description=description,
-                                       img_url=img_url,
+        category = db.scalar(select(Category).where(Category.id == create.category_id))
+        db.execute(insert(Film).values(title=create.title,
+                                       slug=slugify(create.title),
+                                       release=create.release,
+                                       country=create.country,
+                                       genre=create.genre,
+                                       director=create.director,
+                                       actors=create.actors,
+                                       description=create.description,
+                                       img_url=create.img_url,
                                        category_id=category.id
                                        ))
         db.commit()
         return RedirectResponse('#', status_code=status.HTTP_303_SEE_OTHER)
-    except:
-        raise HTTPException(409, 'Фильм уже существует')
+    except Exception as e:
+        raise HTTPException(409, 'Что-то пошло не так.')
