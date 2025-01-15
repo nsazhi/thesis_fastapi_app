@@ -4,6 +4,9 @@ from mff_app.models import *
 
 
 class Film(Base):
+    """
+    Создает в базе данных объект модели Фильм, связанный с объектом category.Category
+    """
     __tablename__ = "films"
     __table_args__ = {"keep_existing": True}
     id = Column(Integer, primary_key=True, index=True)

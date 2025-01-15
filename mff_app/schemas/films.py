@@ -2,6 +2,9 @@ from mff_app.schemas import *
 
 
 class CreateFilm(BaseModel):
+    """
+    Валидирует входящие данные и создает объект Фильм.
+    """
     category_id: int = Field(..., description='Категория')
     title: str = Field(..., min_length=2, max_length=100, description='Название фильма')
     release: int = Field(..., ge=1900, description='Год выхода')

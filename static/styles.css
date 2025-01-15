@@ -69,10 +69,10 @@ a.page-link:hover {
     color: #2c4859;
 }
 
-input {
+input, textarea {
     width: 50%;
 }
 
-input.textarea {
+textarea {
     height: 200px;
 }

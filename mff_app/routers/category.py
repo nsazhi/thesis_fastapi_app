@@ -1,16 +1,15 @@
 from mff_app.routers import *
 
 # Создание маршрутизатора
-router = APIRouter(prefix='/admin/category', tags=['category', ])
+router = APIRouter(prefix='/admin/category', tags=['admin', ])
 
 
-# Маршруты для шаблонов
-# Маршруты для админки с префиксом /admin
-# и с префиксом /category для корректной работы с такими же endpoint в фильмах
 @router.get('/create')
 async def category_form(request: Request):
     """
-    Пустая форма для добавления категории (для админа)
+    **Маршрут GET-запроса с префиксом /admin/category:** Пустая форма создания категории.
+
+    :return: Шаблон `admin/cat_panel.html`
     """
     return templates.TemplateResponse('admin/cat_panel.html', {'request': request})
 
@@ -18,7 +17,10 @@ async def category_form(request: Request):
 @router.post('/create')
 async def create_category(db: DbSession, create: CreateCategory = Form()):
     """
-    Добавление категории (для админа)
+    **Маршрут POST-запроса с префиксом /admin/category:** Создание категории.
+
+    :raise: Ошибка создания - категория уже существует\n
+    :return redirect: GET-запрос на текущую страницу `admin/cat_panel.html`
     """
     try:
         db.execute(insert(Category).values(name=create.name,
