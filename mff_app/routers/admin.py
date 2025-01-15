@@ -19,7 +19,8 @@ async def add_admin(db: DbSession, create: CreateAdmin):
     """
     **Маршрут POST-запроса с префиксом /admin:** Регистрация администратора.
 
-    :raise: Ошибка регистрации - username уже существует\n
+    :raise: Ошибка регистрации - username уже существует
+
     :return HTTP: 201, Успешная регистрация
     """
     try:
@@ -42,7 +43,7 @@ async def login_in(db: DbSession, username: str = Form(), password: str = Form()
     **Маршрут POST-запроса с префиксом /admin:** Вход администратора.
 
     :raise: Ошибка входа - неверный пароль\n
-    :return redirect: Шаблон создания категории `admin/cat_panel.html`
+    :return redirect: Шаблон `admin/cat_panel.html`
     """
     admin = db.scalar(select(Admin).where(Admin.username == username))
     if admin:

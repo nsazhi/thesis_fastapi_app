@@ -19,7 +19,8 @@ async def create_category(db: DbSession, create: CreateCategory = Form()):
     """
     **Маршрут POST-запроса с префиксом /admin/category:** Создание категории.
 
-    :raise: Ошибка создания - категория уже существует\n
+    :raise: Ошибка создания - категория уже существует
+
     :return redirect: GET-запрос на текущую страницу `admin/cat_panel.html`
     """
     try:

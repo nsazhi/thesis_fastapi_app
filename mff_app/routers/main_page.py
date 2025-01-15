@@ -12,7 +12,7 @@ async def main_page(request: Request, db: DbSession) -> HTMLResponse:
     **Context**
 
     ``categories``
-        Список объектов [`category.Category`, `category.Category`].
+        Список объектов `category.Category`.
 
     :return: Шаблон `main.html`
     """

@@ -17,10 +17,10 @@ async def get_films_by_category(request: Request, db: DbSession, slug: str = '')
     **Context**
 
     ``category``
-        Объект category.Category с фильтром по Category.slug
+        Объект category.Category с Category.slug == slug
 
     ``films``
-        Список объектов [`films.Film`, `films.Film`] с фильтром по Film.category_id.
+        Список объектов `films.Film` с фильтром по Film.category_id.
 
     :return: Шаблон `films/films_by_category.html`
 
@@ -29,9 +29,9 @@ async def get_films_by_category(request: Request, db: DbSession, slug: str = '')
     **Context**
 
     ``films``
-        Список объектов [`films.Film`, `films.Film`].
+        Список объектов `films.Film`.
 
-    :return: Шаблон `films/films.html`,
+    :return: Шаблон `films/films.html`
     """
     if slug:
         category = db.scalar(select(Category).where(Category.slug == slug))
@@ -49,15 +49,15 @@ async def get_films_by_category(request: Request, db: DbSession, category_slug: 
     """
     **Маршрут GET-запроса с префиксом /films:** Отображает список фильмов по категориям.
 
-    :param request: category_slug
+    :param request: `category_slug`
 
     **Context**
 
     ``category``
-        Объект category.Category с фильтром по Category.slug
+        Объект category.Category с Category.slug == category_slug.
 
     ``films``
-        Список объектов [`films.Film`, `films.Film`] с фильтром по Film.category_id.
+        Список объектов `films.Film` с фильтром по Film.category_id.
 
     :return: Шаблон `films/films_by_category.html`
     """
@@ -82,7 +82,8 @@ async def create_film(db: DbSession, create: CreateFilm = Form()):
     """
     **Маршрут POST-запроса с префиксом /admin/films:** Создание фильма.
 
-    :raise: Ошибка создания.\n
+    :raise: Ошибка создания.
+
     :return redirect: GET-запрос на текущую страницу `admin/film_panel.html`
     """
     try:
